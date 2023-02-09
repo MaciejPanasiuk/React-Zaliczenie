@@ -11,11 +11,18 @@ class ProductsFilters extends React.Component {
     };
   }
   handleSearchPhraseChange = (event) => {
-    this.setState({ searchPhrase: event.target.value }
+    this.setState({ searchPhrase: event.target.value }, () =>
+      this.filterProducts()
     );
   };
   handleFilterByCathegory = (event) => {
-    this.setState({ CathegorySelected: event.target.value }
+    this.setState({ CathegorySelected: event.target.value }, () =>
+      this.filterProducts()
+    );
+  };
+  handleShowOnlyFood = (event) => {
+    this.setState({ searchOnlyFoodStuffs: event.target.checked }, () =>
+      this.filterProducts()
     );
   };
   getAllUniqueCathegories = () => {
@@ -36,12 +43,17 @@ class ProductsFilters extends React.Component {
         (item) => item.kategoria === CathegorySelected
       );
     }
+    if (searchOnlyFoodStuffs) {
+      filteredProducts = filteredProducts.filter(
+        (item) => item.produktSpozywczy === true
+      );
+    }
     // przekazanie wyfiltrowanych pojazdów do komponentu rodzica (App)
     this.props.sendFilteredProductsBackToParent(filteredProducts);
   };
   render() {
     const uniqueCathegories = this.getAllUniqueCathegories(); //troche słaba opcja, jak masz kod js i jsx obok siebie, łatwo sie walnąć
-    const { searchPhrase, CathegorySelected} =
+    const { searchPhrase, CathegorySelected, searchOnlyFoodStuffs } =
       this.state;
     return (
       <div className={styles.Wrapper}>
@@ -65,7 +77,12 @@ class ProductsFilters extends React.Component {
             </option>
           ))}
         </select>
-        <button onClick={this.filterProducts}>szukaj produkt</button>
+        <p> Tylko produkty spożywcze </p>
+        <input
+          type="checkbox"
+          onChange={this.handleShowOnlyFood}
+          value={searchOnlyFoodStuffs}
+        ></input>
       </div>
     );
   }
