@@ -20,14 +20,17 @@ function App() {
     shoppingItems.splice(produkt, 1); //tu wrzucamy nasz item do tablicy, nastepnie wywołujemy funkcję która updatuje wartość tablicy, koniecznie z destrukturyzacją
     setShoppingItems([...shoppingItems]);
   };
-  useEffect(()=>{
-    setProductsToDisplay([...UpdatedItems])//tak by podczas zmiany state mógł przerenderować appkę 
-  },[UpdatedItems])
-  
+  useEffect(() => {
+    setProductsToDisplay([...UpdatedItems]); //tak by podczas zmiany state mógł przerenderować appkę
+  }, [UpdatedItems]);
+
   return (
     <div className={styles.appWrapper}>
-      <AddProducts/>
-      <ProductsFilters />
+      <AddProducts />
+      <ProductsFilters
+        UpdatedItems={UpdatedItems}
+        sendFilteredProductsBackToParent={setProductsToDisplay}
+      />
       <div className={styles.columnsWrapper}>
         <ProductsList
           onAddtoShoppingList={onAddtoShoppingList}
@@ -42,4 +45,3 @@ function App() {
   );
 }
 export default App;
-
