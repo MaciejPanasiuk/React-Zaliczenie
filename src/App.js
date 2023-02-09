@@ -26,7 +26,8 @@ function App() {
 
   return (
     <div className={styles.appWrapper}>
-      <AddProducts />
+      <AddProducts UpdatedItems={UpdatedItems}
+        sendUpdatedProductsBacktoParents={setUpdatedItems} />
       <ProductsFilters
         UpdatedItems={UpdatedItems}
         sendFilteredProductsBackToParent={setProductsToDisplay}
