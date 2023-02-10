@@ -17,13 +17,15 @@ function App() {
     setShoppingItems([...shoppingItems]);
   };
   useEffect(() => {
-    setProductsToDisplay([...UpdatedItems]); //tak by podczas zmiany state mógł przerenderować appkę
+    setProductsToDisplay([...UpdatedItems]); //tak by podczas zmiany state mógł przerenderować appkę i zaktualizować dane do wyświetlenia
   }, [UpdatedItems]);
 
   return (
     <div className={styles.appWrapper}>
-      <AddProducts UpdatedItems={UpdatedItems}
-        sendUpdatedProductsBacktoParents={setUpdatedItems} />
+      <AddProducts
+        UpdatedItems={UpdatedItems}
+        sendUpdatedProductsBacktoParents={setUpdatedItems}
+      />
       <ProductsFilters
         UpdatedItems={UpdatedItems}
         sendFilteredProductsBackToParent={setProductsToDisplay}
