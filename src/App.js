@@ -11,12 +11,8 @@ function App() {
   const [shoppingItems, setShoppingItems] = useState([]);
   const [UpdatedItems, setUpdatedItems] = useState(produkty);
   const [ProductsToDisplay, setProductsToDisplay] = useState([...UpdatedItems]);
-  const onAddtoShoppingList = (produkt) => {
-    shoppingItems.push(produkt); //tu wrzucamy nasz item do tablicy, nastepnie wywołujemy funkcję która updatuje wartość tablicy, koniecznie z destrukturyzacją
-    setShoppingItems([...shoppingItems]);
-  };
-  const onRemoveFromShoppingList = (produkt, event) => {
-    event.preventDefault();
+
+  const onRemoveFromShoppingList = (produkt) => {
     shoppingItems.splice(produkt, 1); //tu wrzucamy nasz item do tablicy, nastepnie wywołujemy funkcję która updatuje wartość tablicy, koniecznie z destrukturyzacją
     setShoppingItems([...shoppingItems]);
   };
@@ -34,8 +30,9 @@ function App() {
       />
       <div className={styles.columnsWrapper}>
         <ProductsList
-          onAddtoShoppingList={onAddtoShoppingList}
           productsToDisplay={ProductsToDisplay}
+          shoppingItems={shoppingItems}
+          sendUpdatedShoppingList={setShoppingItems}
         />
         <ShopingList
           onRemoveFromShoppingList={onRemoveFromShoppingList}

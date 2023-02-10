@@ -67,7 +67,7 @@ function AddProducts(props) {
             onChange={handleNewIsFood}
           />
         </label>
-        <input type="submit" value="Submit" />
+        <input type="submit" value="Dodaj" />
       </form>
     </div>
   );
